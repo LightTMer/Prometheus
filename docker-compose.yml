@@ -1,0 +1,17 @@
+services:
+  exporter:
+    build: .
+    container_name: exporter
+    environment:
+      - EXPORTER_HOST=0.0.0.0
+      - EXPORTER_PORT=8000
+    ports:
+      - "8000:8000"
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
